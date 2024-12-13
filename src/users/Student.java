@@ -2,17 +2,19 @@ package users;
 
 import education.Course;
 import education.Transcript;
+import interfaces.Notifiable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Student extends User {
+public class Student extends User implements Notifiable {
     private int yearOfStudy;
     private double gpa;
     private String educationalProgram;
     private List<Course> registeredCourses;
     private Transcript transcript;
+    private List<String> notifications = new ArrayList<>();
 
     public Student(String IIN, String name, String surname, String email, String password, int yearOfStudy, double gpa, String educationalProgram) {
         super(IIN, name, surname, email, password);
@@ -21,6 +23,20 @@ public class Student extends User {
         this.educationalProgram = educationalProgram;
         this.registeredCourses = new ArrayList<>();
         this.transcript = new Transcript();
+    }
+
+    @Override
+    public void sendNotification(String message) {
+        System.out.println("Student cannot send notifications directly");
+    }
+
+    @Override
+    public void receiveNotification(String message) {
+        System.out.println("New notification for Student: " + message);
+    }
+
+    public List<String> getNotifications() {
+        return notifications;
     }
 
     public void viewCourses() {

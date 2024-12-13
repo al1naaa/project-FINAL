@@ -1,11 +1,11 @@
 package education;
 
-import interfaces.Schedule;
+import interfaces.Schedulable;
 import users.*;
 
 import java.util.*;
 
-public class Lesson implements Schedule {
+public class Lesson implements Schedulable {
     private String lessonName;
     private int lessonId;
     private Teacher teacher;

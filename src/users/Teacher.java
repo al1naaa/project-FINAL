@@ -2,15 +2,17 @@ package users;
 
 import education.Course;
 import education.Mark;
+import interfaces.Notifiable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Teacher extends User {
+public class Teacher extends User implements Notifiable {
     private String degree;
     private String faculty;
     private List<Course> courses;
     private List<String> complaints;
+    private List<String> notifications = new ArrayList<>();
 
     public Teacher(String IIN, String name, String surname, String email, String password, String degree, String faculty) {
         super(IIN, name, surname, email, password);
@@ -18,6 +20,21 @@ public class Teacher extends User {
         this.faculty = faculty;
         this.courses = new ArrayList<>();
         this.complaints = new ArrayList<>();
+    }
+
+    @Override
+    public void sendNotification(String message) {
+        System.out.println("Teacher sends notification: " + message);
+    }
+
+    @Override
+    public void receiveNotification(String message) {
+        notifications.add(message);
+        System.out.println("New notification for Teacher: " + message);
+    }
+
+    public List<String> getNotifications() {
+        return notifications;
     }
 
     public void manageCourse(Course course, boolean add) {

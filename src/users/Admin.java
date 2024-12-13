@@ -1,14 +1,32 @@
 package users;
 
+import interfaces.Notifiable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin extends User {
+public class Admin extends User implements Notifiable {
     private List<String> logFiles;
+    private List<String> notifications = new ArrayList<>();
 
     public Admin(String IIN, String name, String surname, String email, String password) {
         super(IIN, name, surname, email, password);
         this.logFiles = new ArrayList<>();
+    }
+
+    @Override
+    public void sendNotification(String message) {
+        System.out.println("Admin sends notification: " + message);
+    }
+
+    @Override
+    public void receiveNotification(String message) {
+        notifications.add(message);
+        System.out.println("New notification for Admin: " + message);
+    }
+
+    public List<String> getNotifications() {
+        return notifications;
     }
 
     // Methods

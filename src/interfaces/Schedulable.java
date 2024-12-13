@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface Schedule {
+public interface Schedulable {
     void setSchedule(String dateTime);
     String getSchedule();
     void displaySchedule();

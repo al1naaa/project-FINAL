@@ -1,10 +1,10 @@
 import database.UserService;
 import education.*;
 import communication.*;
-
+import users.*;
 import java.util.*;
 
-public class Main{
+public class Main {
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -18,7 +18,7 @@ public class Main{
         initializeSystem(courses, library);
 
         while (true) {
-            System.out.println("Welcome to University System!");
+            System.out.println("\nWelcome to University System!");
             System.out.println("1. Sign Up");
             System.out.println("2. Log In");
             System.out.println("3. Exit");
@@ -39,34 +39,34 @@ public class Main{
     }
 
     private static void initializeSystem(List<Course> courses, Library library) {
-        // Example: Initialize library with books
+        // Initialize library with books
         library.addBook("Introduction to Algorithms");
         library.addBook("Clean Code");
         library.addBook("Artificial Intelligence: A Modern Approach");
 
-        // Example: Initialize courses
+        // Initialize courses
         courses.add(new Course("Object-Oriented Programming", 101, null));
         courses.add(new Course("Data Structures", 102, null));
         courses.add(new Course("Machine Learning", 103, null));
     }
 
     private static void signUp(UserService userService) {
-        System.out.println("Sign Up:");
+        System.out.println("\nSign Up:");
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter email: ");
         String email = scanner.nextLine();
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
-        System.out.print("Enter role (student/teacher/admin): ");
-        String role = scanner.nextLine();
+        System.out.print("Enter role (student/teacher/admin/manager): ");
+        String role = scanner.nextLine().toLowerCase();
 
         userService.signUp(username, email, password, role);
         System.out.println("User signed up successfully!");
     }
 
     private static void logIn(UserService userService, List<Course> courses, Library library, List<News> newsList, List<Message> messages) {
-        System.out.println("Log In:");
+        System.out.println("\nLog In:");
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter password: ");
@@ -80,10 +80,10 @@ public class Main{
 
             switch (role) {
                 case "student":
-                    studentActions(courses, library);
+                    studentActions(courses, library, username);
                     break;
                 case "teacher":
-                    teacherActions(courses, messages);
+                    teacherActions(courses, messages, username);
                     break;
                 case "admin":
                     adminActions(newsList);
@@ -99,11 +99,12 @@ public class Main{
         }
     }
 
-    private static void studentActions(List<Course> courses, Library library) {
-        System.out.println("Student Dashboard:");
+    private static void studentActions(List<Course> courses, Library library, String username) {
+        System.out.println("\nStudent Dashboard:");
         System.out.println("1. View Courses");
         System.out.println("2. Borrow Book");
         System.out.println("3. Return Book");
+        System.out.println("4. View Notifications");
         System.out.print("Choose an option: ");
         int choice = Integer.parseInt(scanner.nextLine());
 
@@ -125,15 +126,18 @@ public class Main{
             String bookName = scanner.nextLine();
             library.addBook(bookName);
             System.out.println("You returned: " + bookName);
+        } else if (choice == 4) {
+            System.out.println("No notifications for " + username);
         } else {
             System.out.println("Invalid option.");
         }
     }
 
-    private static void teacherActions(List<Course> courses, List<Message> messages) {
-        System.out.println("Teacher Dashboard:");
+    private static void teacherActions(List<Course> courses, List<Message> messages, String username) {
+        System.out.println("\nTeacher Dashboard:");
         System.out.println("1. View Courses");
         System.out.println("2. Send Message");
+        System.out.println("3. View Notifications");
         System.out.print("Choose an option: ");
         int choice = Integer.parseInt(scanner.nextLine());
 
@@ -146,15 +150,17 @@ public class Main{
             String recipient = scanner.nextLine();
             System.out.print("Enter message: ");
             String body = scanner.nextLine();
-            messages.add(new Message(body, "Teacher", recipient));
+            messages.add(new Message(body, username, recipient));
             System.out.println("Message sent to " + recipient);
+        } else if (choice == 3) {
+            System.out.println("No notifications for " + username);
         } else {
             System.out.println("Invalid option.");
         }
     }
 
     private static void adminActions(List<News> newsList) {
-        System.out.println("Admin Dashboard:");
+        System.out.println("\nAdmin Dashboard:");
         System.out.println("1. View News");
         System.out.println("2. Add News");
         System.out.print("Choose an option: ");
@@ -178,7 +184,7 @@ public class Main{
     }
 
     private static void managerActions(List<Course> courses, List<News> newsList, List<Message> messages) {
-        System.out.println("Manager Dashboard:");
+        System.out.println("\nManager Dashboard:");
         System.out.println("1. Approve Course Registration");
         System.out.println("2. Manage News");
         System.out.print("Choose an option: ");
