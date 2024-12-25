@@ -1,6 +1,6 @@
 package users;
 
-public class Employee {
+public class Employee extends User {
 	private String specialization;
     private Double salary;
     private Integer experience;
@@ -8,6 +8,7 @@ public class Employee {
     private String dateOfJoining;
     
     public Employee(String specialization, Double salary, Integer experience, String department, String dateOfJoining) {
+        super();
         this.specialization = specialization;
         this.salary = salary;
         this.experience = experience;

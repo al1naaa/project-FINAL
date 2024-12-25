@@ -8,6 +8,9 @@ public class Library implements Notifiable {
     private Map<String, Boolean> books;
     public Library() {
         books = new HashMap<>();
+        addBook("Introduction to Algorithms");
+        addBook("Clean Code");
+        addBook("Artificial Intelligence: A Modern Approach");
     }
 
     public void addBook(String book) {
@@ -31,4 +34,14 @@ public class Library implements Notifiable {
     public void receiveNotification(String message) {
         System.out.println("Library received notification: " + message);
     }
+
+    public void viewBooks() {
+        System.out.println("Available books:");
+        for (Map.Entry<String, Boolean> entry : books.entrySet()) {
+            String bookName = entry.getKey();
+            boolean isAvailable = entry.getValue();
+            System.out.println(bookName + (isAvailable ? " (Available)" : " (Not Available)"));
+        }
+    }
+
 }

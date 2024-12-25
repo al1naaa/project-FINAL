@@ -15,13 +15,12 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
     private int citations;
     private String journal;
 
-    // Default Constructor
     public ResearchPaper() {
         this.doi = UUID.randomUUID().toString();
         this.citations = 0;
     }
 
-    // Parameterized Constructor
+
     public ResearchPaper(String title, List<String> authors, List<String> pages, int year, String journal) {
         this();
         this.title = title;
@@ -31,7 +30,7 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
         this.journal = journal;
     }
 
-    // Getters and Setters
+
     public String getDoi() {
         return doi;
     }
@@ -88,7 +87,7 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
         this.journal = journal;
     }
 
-    // Generate citation in the specified format
+
     public String getCitation(CitationFormat format) {
         if (format == CitationFormat.BIBTEX) {
             return "@article{\n  title={" + title + "},\n  author={" + String.join(" and ", authors) + "},\n  journal={" + journal + "},\n  year={" + year + "},\n  doi={" + doi + "}\n}";
@@ -97,7 +96,6 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
         }
     }
 
-    // Read content of all pages
     public String read() {
         return String.join("\n\n", pages);
     }

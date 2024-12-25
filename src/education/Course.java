@@ -50,4 +50,24 @@ public class Course {
     public void displayCourseInfo() {
         System.out.println("Course: " + courseName + " | Teacher: " + (teacher != null ? teacher.getName() : "Not assigned"));
     }
+    public void assignTeacher(Teacher teacher) {
+        if (this.teacher == null) {
+            this.teacher = teacher;
+            teacher.addCourse(this);
+        } else {
+            System.out.println("Course already has a teacher: " + this.teacher.getName());
+        }
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public int getYearOfStudy() {
+        return yearOfStudy;
+    }
 }

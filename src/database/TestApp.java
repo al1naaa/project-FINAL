@@ -14,6 +14,12 @@ public class TestApp {
         scanner.nextLine();
 
         if (option == 1) {
+            System.out.print("Enter IIN: ");
+            String IIN = scanner.nextLine();
+            System.out.print("Enter name: ");
+            String name = scanner.nextLine();
+            System.out.print("Enter surname: ");
+            String surname = scanner.nextLine();
             System.out.print("Enter username: ");
             String username = scanner.nextLine();
             System.out.print("Enter email: ");
@@ -23,7 +29,7 @@ public class TestApp {
             System.out.print("Enter role (student/teacher/admin): ");
             String role = scanner.nextLine();
 
-            userService.signUp(username, email, password, role);
+            userService.signUp(IIN, name, surname, email, password, role);
         } else if (option == 2) {
             System.out.print("Enter username: ");
             String username = scanner.nextLine();

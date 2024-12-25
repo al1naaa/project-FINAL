@@ -11,6 +11,9 @@ public class Mark {
         this.finalExam = finalExam;
     }
 
+    public Mark(int mark) {
+    }
+
     public int calculateFinalScore() {
         return firstAssessment + secondAssessment + finalExam;
     }

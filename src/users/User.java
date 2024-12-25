@@ -7,13 +7,15 @@ public abstract class User {
     private String email;
     private String password;
 
-    // Constructors
     public User(String IIN, String name, String surname, String email, String password) {
         this.IIN = IIN;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
+    }
+
+    public User() {
     }
 
     public User(String userID, String name, String email) {
@@ -59,28 +61,13 @@ public abstract class User {
         this.password = password;
     }
 
-    // Common operations for all users
-    public void login() {
-        System.out.println(name + " logged in.");
-    }
-
-    public void logout() {
-        System.out.println(name + " logged out.");
-    }
-
     public void viewProfile() {
-        System.out.println("Profile Details:");
         System.out.println("Name: " + name + " " + surname);
         System.out.println("Email: " + email);
         System.out.println("IIN: " + IIN);
     }
 
-    public void printUserDetails(){
-        System.out.println("Name: " + name + " " + surname);
-        System.out.println("Email: " + email);
-    }
+    protected void printUserDetails() {
 
-    // Abstract method to be implemented by extended classes
-    //public abstract void doSomeSpecificOperations();
-    // NEEDS MODIFICATIONS - Admin, Librarian, Researcher, Student, Teacher!!!
+    }
 }

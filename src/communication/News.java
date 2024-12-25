@@ -1,5 +1,8 @@
 package communication;
 
+import database.Database;
+
+import java.sql.*;
 import java.util.*;
 import java.time.LocalDateTime;
 
@@ -26,6 +29,45 @@ public class News {
         this.likes = 0;
         this.dislikes = 0;
     }
+
+    // Добавление новости
+    public void addNews(String title, String content) {
+        String query = "INSERT INTO news (title, content) VALUES (?, ?)";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, title);
+            pstmt.setString(2, content);
+            pstmt.executeUpdate();
+            System.out.println("News added successfully!");
+        } catch (Exception e) {
+            System.err.println("Error adding news: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Получение списка новостей
+    public List<News> getNews() {
+        String query = "SELECT * FROM news ORDER BY created_at DESC";
+        List<News> newsList = new ArrayList<>();
+        try (Connection conn = Database.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                newsList.add(new News(
+                        rs.getString("title"),
+                        rs.getString("content"),
+                        rs.getString("created_at")
+                ));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching news: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return newsList;
+    }
+
 
     public void addComment(String comment) {
         comments.add(comment);

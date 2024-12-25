@@ -1,5 +1,5 @@
 package enums;
 
 public enum Language {
-	KAZ, ENG, RUS
+	KZ, EN, RU
 }

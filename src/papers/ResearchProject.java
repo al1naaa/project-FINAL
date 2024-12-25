@@ -17,13 +17,11 @@ public class ResearchProject implements Serializable {
     private Researcher researchSupervisor;
     private List<Researcher> participants;
 
-    // Default Constructor
     public ResearchProject() {
         this.publishedPapers = new ArrayList<>();
         this.participants = new ArrayList<>();
     }
 
-    // Parameterized Constructor
     public ResearchProject(String topic, Researcher researchSupervisor, List<ResearchPaper> publishedPapers, List<Researcher> participants)
             throws InvalidSupervisorException, InvalidResearchPaperException {
         if (researchSupervisor.calculateHIndex() < 3) {
@@ -42,7 +40,6 @@ public class ResearchProject implements Serializable {
         this.participants = new ArrayList<>(participants);
     }
 
-    // Getters and Setters
     public String getTopic() {
         return topic;
     }
@@ -78,7 +75,6 @@ public class ResearchProject implements Serializable {
         this.participants = participants;
     }
 
-    // Add a participant to the project
     public void addParticipant(Researcher participant) {
         if (!participants.contains(participant)) {
             participants.add(participant);
@@ -87,7 +83,6 @@ public class ResearchProject implements Serializable {
         }
     }
 
-    // Remove a participant from the project
     public void removeParticipant(Researcher participant) {
         if (participants.contains(participant)) {
             participants.remove(participant);
@@ -96,7 +91,6 @@ public class ResearchProject implements Serializable {
         }
     }
 
-    // Add a research paper to the project
     public void addResearchPaper(ResearchPaper paper) throws InvalidResearchPaperException {
         boolean hasParticipantAuthor = participants.stream()
                 .anyMatch(participant -> paper.getAuthors().contains(participant));
@@ -110,7 +104,6 @@ public class ResearchProject implements Serializable {
         }
     }
 
-    // Print project details
     public void printProjectDetails() {
         System.out.println("Project Topic: " + topic);
         System.out.println("Supervisor: " + researchSupervisor);
@@ -119,7 +112,6 @@ public class ResearchProject implements Serializable {
         publishedPapers.forEach(paper -> System.out.println(" - " + paper.getTitle()));
     }
 
-    // Print papers sorted by a given comparator
     public void printPapersSorted(Comparator<ResearchPaper> comparator) {
         publishedPapers.stream()
                 .sorted(comparator)

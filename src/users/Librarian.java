@@ -23,4 +23,13 @@ public class Librarian extends User {
         library.addBook(book);
         System.out.println("Book returned by student: " + book);
     }
+
+    public Library getLibrary() {
+        return library;
+    }
+    public void viewBooks() {
+        library.viewBooks();
+    }
+
+
 }
